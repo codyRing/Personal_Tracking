@@ -1,0 +1,1 @@
+GET https://www.strava.com/api/v3/activities?per_page=200&before=1585495552&access_token=8f5e84194f120fa7ee94fb6f857774f32880f49e
