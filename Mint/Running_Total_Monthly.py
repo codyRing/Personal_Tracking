@@ -54,7 +54,7 @@ Spend_Matrix.sort_index(level=0, ascending=False, inplace=True)
 
 fig, ax = plt.subplots(nrows=1, ncols=1, figsize=[14, 7])
 sns.heatmap(Spend_Matrix, annot=True, annot_kws={"size": 7}, fmt="g", linewidths=.5, cbar=False, cmap="Blues", ax=ax)
-# .savefig('../data/mint/Daily_Heat.png', dpi=300)
+.savefig('../data/mint/Daily_Heat.png', dpi=300)
 
 fig, ax = plt.subplots(nrows=1, ncols=1, figsize=[14, 7])
 for i in range(1, 13):
@@ -64,61 +64,5 @@ for i in range(1, 13):
         data=Spend_Matrix
 
     )
-plt.show()
 
-# sns.lineplot(
-#     x=Spend_Matrix.index,
-#     y=Spend_Matrix[2],
-#     data=Spend_Matrix
-# )
-# sns.lineplot(
-#     x=Spend_Matrix.index,
-#     y=Spend_Matrix[3],
-#     data=Spend_Matrix
-# )
-# sns.lineplot(
-#     x=Spend_Matrix.index,
-#     y=Spend_Matrix[4],
-#     data=Spend_Matrix
-# )
-# sns.lineplot(
-#     x=Spend_Matrix.index,
-#     y=Spend_Matrix[5],
-#     data=Spend_Matrix
-# )
-# sns.lineplot(
-#     x=Spend_Matrix.index,
-#     y=Spend_Matrix[6],
-#     data=Spend_Matrix
-# )
-# sns.lineplot(
-#     x=Spend_Matrix.index,
-#     y=Spend_Matrix[7],
-#     data=Spend_Matrix
-# )
-# sns.lineplot(
-#     x=Spend_Matrix.index,
-#     y=Spend_Matrix[8],
-#     data=Spend_Matrix
-# )
-# sns.lineplot(
-#     x=Spend_Matrix.index,
-#     y=Spend_Matrix[9],
-#     data=Spend_Matrix
-# )
-# sns.lineplot(
-#     x=Spend_Matrix.index,
-#     y=Spend_Matrix[10],
-#     data=Spend_Matrix
-# )
-# sns.lineplot(
-#     x=Spend_Matrix.index,
-#     y=Spend_Matrix[11],
-#     data=Spend_Matrix
-# )
-# sns.lineplot(
-#     x=Spend_Matrix.index,
-#     y=Spend_Matrix[12],
-#     data=Spend_Matrix
-# )
-# plt.show()
+plt.show()
