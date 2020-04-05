@@ -15,6 +15,7 @@ Spend = pd.DataFrame(data[data['Transaction Type'].str.contains('debit')])
 Earn = pd.DataFrame(data[data['Transaction Type'].str.contains('credit')])
 
 # ---------------What Values to drop from Spend?------------------------------------
+Spend = Spend[~Spend['Category'].isin(['Auto Insurance','Mortgage & Rent','Utilities','Credit Card Payment'])]
 
 # Drop = Spend[Spend['Category'] == 'Mortgage & Rent'].index
 # Spend.drop(Drop,inplace=True)
