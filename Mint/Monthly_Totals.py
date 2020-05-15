@@ -5,17 +5,21 @@ from matplotlib.pyplot import figure
 import seaborn as sns
 from datetime import datetime, timedelta
 from sklearn import preprocessing
+from dateutil.relativedelta import relativedelta
+
 
 data = pd.read_csv('../Data/Mint/transactions.csv')
-
-data['Date'] = pd.to_datetime(data.Date) - timedelta(days=1)
+#data['Date'] = pd.to_datetime(data.Date) - timedelta(days=1)
+data['Date'] = pd.to_datetime(data.Date)
 data = data.set_index('Date')
+data = data[~data['Category'].isin(['Credit Card Payment','Transfer','Financial Advisor'])]
+
 
 Spend = pd.DataFrame(data[data['Transaction Type'].str.contains('debit')])
 Earn = pd.DataFrame(data[data['Transaction Type'].str.contains('credit')])
 
 # ---------------What Values to drop from Spend?------------------------------------
-Spend = Spend[~Spend['Category'].isin(['Auto Insurance','Mortgage & Rent','Utilities','Credit Card Payment'])]
+# Spend = Spend[~Spend['Category'].isin(['Credit Card Payment','Transfer'])]
 
 # Drop = Spend[Spend['Category'] == 'Mortgage & Rent'].index
 # Spend.drop(Drop,inplace=True)
@@ -30,7 +34,8 @@ Spend = Spend[~Spend['Category'].isin(['Auto Insurance','Mortgage & Rent','Utili
 # ----------------Resample--------------------------------------------------
 Daily = (datetime.today() - timedelta(days=31))
 Weekly = (datetime.today() - timedelta(weeks=20))
-Monthly = (datetime.today() - timedelta(weeks=52))
+Monthly = (datetime.now() - relativedelta(years=1) + relativedelta(months =1))
+
 
 # d = datetime.today() - timedelta(days=45)
 # mask = (Daily_Spend.index >= d)
@@ -40,7 +45,7 @@ Monthly = (datetime.today() - timedelta(weeks=52))
 Daily_Spend = Spend.resample('D').sum()
 Daily_Spend['Day_Num'] = Daily_Spend.index.strftime('%Y-%A')
 Daily_Spend['AVG'] = Daily_Spend.Amount.rolling(7).mean()
-Daily_Spend.to_csv('../data/mint/Daily_Spend.csv')
+#Daily_Spend.to_csv('../data/mint/Daily_Spend.csv')
 Daily_Spend = Daily_Spend.loc[Daily_Spend.index >= Daily]
 
 Weekly_Spend = Spend.resample('W').sum()
@@ -73,6 +78,7 @@ for p in ax2.patches:
              fontsize=12, color='Green', ha='center', va='bottom')
 
 plt.savefig('../data/mint/Over_Under.png', dpi=300)
+plt.show()
 
 # ----------------------------------------------------------------
 fig, ax = plt.subplots(nrows=1, ncols=1, figsize=[14, 7])
