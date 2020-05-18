@@ -90,7 +90,7 @@ ax.set_xlabel('Month')
 ax.set_ylabel('Day')
 
 plt.savefig('../data/mint/Daily_Discretionary_Heat.png', dpi=300)
-plt.show()
+#plt.show()
 
 fig1, ax1 = plt.subplots(nrows=1, ncols=1, figsize=[14, 7])
 sns.heatmap(Spend_Matrix_Fixed,
@@ -107,29 +107,9 @@ plt.title('Fixed Spending')
 ax1.set_xlabel('Month')
 ax1.set_ylabel('Day')
 
-plt.show()
+#plt.show()
 plt.savefig('../data/mint/Daily_Fixed_Heat.png', dpi=300)
 
 
 
 
-
-
-
-
-
-# fig, ax1 = plt.subplots(nrows=1, ncols=1, figsize=[14, 7])
-# sns.barplot(x='Category',y='Amount',data=Spend)
-#
-# plt.show()
-
-# fig, ax = plt.subplots(nrows=1, ncols=1, figsize=[14, 7])
-# for i in range(1, 13):
-#     sns.lineplot(
-#         x=Spend_Matrix.index,
-#         y=Spend_Matrix[i],
-#         data=Spend_Matrix
-#
-#     )
-
-# plt.show()
