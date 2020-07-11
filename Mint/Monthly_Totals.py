@@ -78,7 +78,7 @@ for p in ax2.patches:
              fontsize=12, color='Green', ha='center', va='bottom')
 
 plt.savefig('../data/mint/Over_Under.png', dpi=300)
-plt.show()
+# plt.show()
 
 # ----------------------------------------------------------------
 fig, ax = plt.subplots(nrows=1, ncols=1, figsize=[14, 7])
