@@ -30,10 +30,10 @@ Earn = pd.DataFrame(data[data['Transaction Type'].str.contains('credit')])
 # x_scaled = min_max_scaler.fit_transform(x)
 # Spend = pd.DataFrame(x_scaled,index=Spend.index,columns=['Amount','Category'])
 
-a, b = 0, 1
-x, y = Spend.Amount.min(), Spend.Amount.max()
-# print(x, y)
-Spend['Amount_N'] = (Spend.Amount - x) / (y - x) * (b - a) + a
+# a, b = 0, 1
+# x, y = Spend.Amount.min(), Spend.Amount.max()
+# # print(x, y)
+# Spend['Amount_N'] = (Spend.Amount - x) / (y - x) * (b - a) + a
 
 # Use to extend index to today
 new_datetime_range = pd.date_range(start=Spend.index.min(), end=datetime.today(), freq="D")
@@ -70,7 +70,7 @@ Spend_Matrix = Spend.resample('D').sum().reindex(new_datetime_range, fill_value=
 Spend_Matrix = pd.pivot_table(Spend_Matrix,
                               index=Spend_Matrix.index.day,
                               columns=Spend_Matrix.index.month,
-                              values="Amount_N")
+                              values="Amount")
 
 Spend_Matrix = Spend_Matrix.cumsum()
 Spend_Matrix.sort_index(level=0, ascending=False, inplace=True)
@@ -79,7 +79,7 @@ Spend_Matrix_Fixed = Spend_Fixed.resample('D').sum().reindex(new_datetime_range,
 Spend_Matrix_Fixed = pd.pivot_table(Spend_Matrix_Fixed,
                                     index=Spend_Matrix_Fixed.index.day,
                                     columns=Spend_Matrix_Fixed.index.month,
-                                    values="Amount_N")
+                                    values="Amount")
 
 Spend_Matrix_Fixed = Spend_Matrix_Fixed.cumsum()
 Spend_Matrix_Fixed.sort_index(level=0, ascending=False, inplace=True)
@@ -88,7 +88,7 @@ Spend_Matrix_Invest = Spend_Invest.resample('D').sum().reindex(new_datetime_rang
 Spend_Matrix_Invest = pd.pivot_table(Spend_Matrix_Invest,
                                      index=Spend_Matrix_Invest.index.day,
                                      columns=Spend_Matrix_Invest.index.month,
-                                     values="Amount_N")
+                                     values="Amount")
 
 Spend_Matrix_Invest = Spend_Matrix_Invest.cumsum()
 Spend_Matrix_Invest.sort_index(level=0, ascending=False, inplace=True)
@@ -98,8 +98,8 @@ fig, ax = plt.subplots(nrows=1, ncols=1, figsize=[14, 7])
 sns.heatmap(Spend_Matrix,
             annot=True,
             annot_kws={"size": 7},
-            vmin=0,
-            vmax=.5,
+            vmin=500,
+            vmax=2000,
             fmt="g",
             linewidths=.5,
             cbar=False,
@@ -116,8 +116,8 @@ fig, ax = plt.subplots(nrows=1, ncols=1, figsize=[14, 7])
 sns.heatmap(Spend_Matrix_Invest,
             annot=True,
             annot_kws={"size": 7},
-            vmin=0,
-            vmax=.5,
+            vmin=500,
+            vmax=2000,
             fmt="g",
             linewidths=.5,
             cbar=False,
@@ -137,8 +137,8 @@ sns.heatmap(Spend_Matrix_Fixed,
             annot_kws={"size": 7},
             fmt="g",
             linewidths=.5,
-            vmin=0,
-            vmax=.5,
+            vmin=500,
+            vmax=3000,
             cbar=False,
             cmap="Blues",
             ax=ax1)
