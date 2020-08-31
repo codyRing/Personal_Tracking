@@ -1,4 +1,4 @@
--- use mint;
+use mint;
 -- drop table notduplicates;
 -- Drop table txn;
 
