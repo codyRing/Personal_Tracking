@@ -1,2 +1,4 @@
 Data/
 mint/test.py
+Data
+./Data
